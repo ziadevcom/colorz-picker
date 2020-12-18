@@ -50,7 +50,7 @@ function showRecentColors(color){
     if(recentColors.length<=0){
         return;
     }else{
-        recentColors.slice(0, 16).forEach(color=>{
+        recentColors.slice(0, 18).forEach(color=>{
             let span = document.createElement('span');
             span.classList.add('color');
             span.style.backgroundColor = color;

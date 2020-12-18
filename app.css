@@ -5,14 +5,15 @@
   margin: 0;
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
-  overflow: hidden;
   user-select: none;
+  overflow-x: hidden;
 }
-
+body {
+  min-height: 100vh;
+}
 body,
 #upload {
   width: 100vw;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -74,7 +75,12 @@ label {
   width: 800px;
   display: flex;
   margin-top: 30px;
+  overflow: visible;
 }
+.recent-colors .color {
+  margin: 2px;
+}
+
 input:focus {
   outline: none;
 }
@@ -130,8 +136,16 @@ a {
   .recent-colors {
     width: 100%;
   }
+  #upload * {
+    font-size: 0.7rem;
+  }
+  #upload div .color {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+  }
   p {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
   .notify {
     top: 50px;
@@ -142,6 +156,14 @@ a {
   .recent-colors {
     flex-wrap: wrap;
     min-height: 100px;
+  }
+  .title h1 {
+    font-size: 1.7rem;
+    margin-top: 1rem;
+  }
+  .link {
+    position: absolute;
+    top: 10px;
   }
 }
 
