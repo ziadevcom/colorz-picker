@@ -79,6 +79,7 @@ label {
 }
 .recent-colors .color {
   margin: 2px;
+  cursor: pointer;
 }
 
 input:focus {
