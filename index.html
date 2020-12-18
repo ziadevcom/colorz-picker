@@ -10,9 +10,9 @@
 <body>
     <div class="title">
         <h1>Worst Color Picker Ever</h1>
-    <p>Use Mousewheel to drag and zoom in or out. Click to select and copy the color.</br>You can see the recently selected colors too and click them to copy their code.</p>
+    <p>Use Mouse to drag and zoom in or out. Double Click to select and copy the color.</br>You can see the recently selected colors too and click them to copy their code.</p>
     </div>
-    <canvas id="canvas" class="crosshair shadow thumb" height="500px" width="800px" onclick='getColorMouseClick(event)' onmousemove="getColorMouseMove(event)">
+    <canvas id="canvas" class="crosshair shadow thumb" height="500px" width="800px" ondblclick='getColorMouseClick(event)' onmousemove="getColorMouseMove(event)">
     </canvas>
     <div id="upload" class="shadow">
         <label for="file" style="cursor: pointer;">Upload Image</label>
