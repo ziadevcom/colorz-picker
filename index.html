@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Picker by Zia</title>
+    <link rel="stylesheet" href="./app.css">
+</head>
+<body>
+    <div class="title">
+        <h1>Worst Color Picker Ever</h1>
+    <p>Use Mousewheel to drag and zoom in or out. Click to select and copy the color.</br>You can see the recently selected colors too and click them to copy their code.</p>
+    </div>
+    <canvas id="canvas" class="crosshair shadow thumb" height="500px" width="800px" onclick='getColorMouseClick(event)' onmousemove="getColorMouseMove(event)">
+    </canvas>
+    <div id="upload" class="shadow">
+        <label for="file" style="cursor: pointer;">Upload Image</label>
+        <div>
+            <span class="color"></span><p>Color Will Display Here</p>
+        </div>
+    </div>
+    <div class="recent-colors"></div>
+    <input type="file"  accept="image/*" id="file" style="display: none;" onchange="drawImageOnCanvas(event)">
+    <div class="notify shadow">Copied the Color Code: rgba(255, 255, 255,)</div>
+    <p class="link">Created by <a href="https://github.com/ziadevcom" target="_blank">Zia Ahmad</a></p>
+</body>
+<script src="./app.js"></script>
+</html>
