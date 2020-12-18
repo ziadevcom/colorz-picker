@@ -5,7 +5,7 @@ recentColorsDiv = document.querySelector('.recent-colors'),
 recentColors = [],
 noti = document.querySelector('.notify'),
 canvasImage;
-window.onload = drawImageOnCanvas(false, `${window.location.hostname}/demo.jpg`)
+window.onload = drawImageOnCanvas(false, 'https://ziadevcom.github.io/colorz-picker/demo.jpg')
 
 // function to draw image on canvas
 function drawImageOnCanvas(input, img){
