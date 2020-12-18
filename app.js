@@ -5,7 +5,8 @@ recentColorsDiv = document.querySelector('.recent-colors'),
 recentColors = [],
 noti = document.querySelector('.notify'),
 canvasImage;
-window.onload = drawImageOnCanvas(false, 'https://ziadevcom.github.io/colorz-picker/demo.jpg')
+window.onload = drawImageOnCanvas(false, 'http://localhost:8080/demo.jpg')
+// window.onload = drawImageOnCanvas(false, 'https://ziadevcom.github.io/colorz-picker/demo.jpg')
 
 // function to draw image on canvas
 function drawImageOnCanvas(input, img){
@@ -23,30 +24,32 @@ function drawImageOnCanvas(input, img){
 
 // function that identifies the color on mouse move
 const getColorMouseMove = function(evt){
-    const {data} = ctx.getImageData(evt.offsetX, evt.offsetY, 1, 1);
-    const rgb = `rgba(${data[0]}, ${data[1]}, ${data[2]}, ${data[3] / 255})`;
-    output.style.background = rgb;
-    output.nextElementSibling.innerText = rgb;
+    let {data} = ctx.getImageData(evt.offsetX, evt.offsetY, 1, 1),
+    rgb = `rgb(${data[0]}, ${data[1]}, ${data[2]})`,
+    hex = RGBToHex(rgb);
+    output.style.background = hex;
+    output.nextElementSibling.innerText = hex;
 }
 
 // function that identifies the color on click
 const getColorMouseClick = function(e){
-    const {data} = ctx.getImageData(e.offsetX, e.offsetY, 1, 1),
-    rgb = `rgba(${data[0]}, ${data[1]}, ${data[2]}, ${data[3] / 255})`;
-    output.nextElementSibling.innerText = rgb;
-    copyColor(rgb)
-    recentColors.unshift(rgb)
+    let {data} = ctx.getImageData(e.offsetX, e.offsetY, 1, 1),
+    rgb = `rgb(${data[0]}, ${data[1]}, ${data[2]})`,
+    hex = RGBToHex(rgb);
+    output.nextElementSibling.innerText = hex;
+    copyColor(hex)
+    recentColors.unshift(hex)
     showRecentColors();
-    notify(rgb);
+    notify(hex);
 }
 
 // function to display recent colors on screen
-function showRecentColors(){
+function showRecentColors(color){
+    console.log(recentColors);
     recentColorsDiv.innerHTML = ''
     if(recentColors.length<=0){
         return;
     }else{
-        // Array.from(recentColorsDiv.children).forEach(el=>el.remove())    
         recentColors.slice(0, 16).forEach(color=>{
             let span = document.createElement('span');
             span.classList.add('color');
@@ -84,6 +87,26 @@ function copyColor(color){
     document.body.removeChild(elem);
 }
 
+// function to convert rgb to hex
+function RGBToHex(color) {
+    // Choose correct separator
+    let sep = color.indexOf(",") > -1 ? "," : " ";
+    // Turn "color(r,g,b)" into [r,g,b]
+    color = color.substr(4).split(")")[0].split(sep);
+  
+    let r = (+color[0]).toString(16),
+        g = (+color[1]).toString(16),
+        b = (+color[2]).toString(16);
+
+    if (r.length == 1)
+      r = "0" + r;
+    if (g.length == 1)
+      g = "0" + g;
+    if (b.length == 1)
+      b = "0" + b;
+  
+    return "#" + r + g + b;
+  }
 
 // This feature is the zoom and dragging one and i just copied it, i dont know shit about how this works
 window.onload = function(){		
