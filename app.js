@@ -24,23 +24,26 @@ function drawImageOnCanvas(input, img){
 
 // function that identifies the color on mouse move
 const getColorMouseMove = function(evt){
-    let {data} = ctx.getImageData(evt.offsetX, evt.offsetY, 1, 1),
-    rgb = `rgb(${data[0]}, ${data[1]}, ${data[2]})`,
-    hex = RGBToHex(rgb);
+    hex = extractColor(evt)
     output.style.background = hex;
     output.nextElementSibling.innerText = hex;
 }
 
 // function that identifies the color on click
 const getColorMouseClick = function(e){
-    let {data} = ctx.getImageData(e.offsetX, e.offsetY, 1, 1),
-    rgb = `rgb(${data[0]}, ${data[1]}, ${data[2]})`,
-    hex = RGBToHex(rgb);
+    hex = extractColor(e)
     output.nextElementSibling.innerText = hex;
     copyColor(hex)
     recentColors.unshift(hex)
     showRecentColors();
     notify(hex);
+}
+
+//  function to extract pixel data and convert to hex
+function extractColor(evt){
+    let {data} = ctx.getImageData(evt.offsetX, evt.offsetY, 1, 1),
+    rgb = `rgb(${data[0]}, ${data[1]}, ${data[2]})`
+    return RGBToHex(rgb)
 }
 
 // function to display recent colors on screen
@@ -60,19 +63,10 @@ function showRecentColors(color){
     }
 }
 
-// function to create notifications
-function notify(color){
-    noti.innerText = `Copied the code: ${color}`;
-    noti.style.background = color;
-    noti.className = 'notify shadow show animated slideInRight'
-    setTimeout(()=>{
-        noti.className='notify shadow show animated slideOutRight'
-    }, 1000)
-}
-
 // Get Recent Color onclick color selector
 function getRecentColorCode(el){
-    let bgColor = window.getComputedStyle(el).getPropertyValue('background-color')
+    let rgb = window.getComputedStyle(el).getPropertyValue('background-color')
+    let bgColor = RGBToHex(rgb)
     copyColor(bgColor);
     notify(bgColor)
 }
@@ -108,6 +102,15 @@ function RGBToHex(color) {
     return "#" + r + g + b;
   }
 
+// function to create notifications
+function notify(color){
+    noti.innerText = `Copied the code: ${color}`;
+    noti.style.background = color;
+    noti.className = 'notify shadow show animated slideInRight'
+    setTimeout(()=>{
+        noti.className='notify shadow show animated slideOutRight'
+    }, 1000)
+}
 // This feature is the zoom and dragging one and i just copied it, i dont know shit about how this works
 window.onload = function(){		
     
@@ -179,7 +182,7 @@ window.onload = function(){
 	
 	// Adds ctx.getTransform() - returns an SVGMatrix
 	// Adds ctx.transformedPoint(x,y) - returns an SVGPoint
-	function trackTransforms(ctx){
+function trackTransforms(ctx){
       var svg = document.createElementNS("http://www.w3.org/2000/svg",'svg');
       var xform = svg.createSVGMatrix();
       ctx.getTransform = function(){ return xform; };
@@ -239,4 +242,4 @@ window.onload = function(){
           pt.x=x; pt.y=y;
           return pt.matrixTransform(xform.inverse());
       }
-	}
+}
