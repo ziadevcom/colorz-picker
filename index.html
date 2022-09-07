@@ -1,29 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Colorz Picker</title>
-    <link rel="stylesheet" href="./app.css">
-    <link rel="shortcut icon" href="./fav.png" type="image/x-icon">
-</head>
-<body>
-    <div class="title">
-        <h1>Worst Color Picker Ever</h1>
-    <p>Use Mouse to drag and zoom in or out. Double Click to select and copy the color.</br>You can see the recently selected colors too and click them to copy their code.</p>
-    </div>
-    <canvas id="canvas" class="crosshair shadow thumb" height="500px" width="800px" ondblclick='getColorMouseClick(event)' onmousemove="getColorMouseMove(event)">
-    </canvas>
-    <div id="upload" class="shadow">
-        <label for="file" style="cursor: pointer;">Upload Image</label>
-        <div>
-            <span class="color"></span><p>Color Will Display Here</p>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Colorz Picker</title>
+        <link rel="stylesheet" href="./app.css">
+        <link rel="shortcut icon" href="./fav.png" type="image/x-icon">
+    </head>
+
+    <body>
+        <div class="title">
+            <h1>Worst Color Picker Ever</h1>
+            <p>Use Mouse to drag and zoom in or out. Double Click to select and copy the color.</br>You can see the
+                recently selected colors too and click them to copy their code.</p>
         </div>
-    </div>
-    <div class="recent-colors"></div>
-    <input type="file"  accept="image/*" id="file" style="display: none;" onchange="drawImageOnCanvas(event)">
-    <div class="notify shadow">Copied the Color Code: rgba(255, 255, 255,)</div>
-    <p class="link">Created by <a href="https://github.com/ziadevcom" target="_blank">Zia Ahmad</a></p>
-</body>
-<script src="./app.js"></script>
+        <div class="color-picker-container">
+            <canvas id="canvas" class="crosshair shadow thumb" height="500px" width="800px"
+                ondblclick='getColorMouseClick(event)' onmousemove="getColorMouseMove(event)">
+            </canvas>
+            <p class="link">Created by <a href="https://github.com/ziadevcom" target="_blank">Zia Ahmad</a></p>
+        </div>
+        <div id="upload" class="shadow">
+            <label for="file" style="cursor: pointer;">Upload Image</label>
+            <div>
+                <span class="color"></span>
+                <p>Color Will Display Here</p>
+            </div>
+        </div>
+        <div class="recent-colors"></div>
+        <input type="file" accept="image/*" id="file" style="display: none;" onchange="drawImageOnCanvas(event)">
+        <div class="notify shadow">Copied the Color Code: rgba(255, 255, 255,)</div>
+    </body>
+    <script src="./app.js"></script>
+
 </html>
