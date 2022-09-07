@@ -12,7 +12,8 @@ window.onload = drawImageOnCanvas(false, 'https://ziadevcom.github.io/colorz-pic
 function drawImageOnCanvas(input, img){
         input ? url = URL.createObjectURL(input.target.files[0]) : url = img
         const image = new Image();
-        image.src =  url
+        image.src =  url;
+        image.setAttribute('crossOrigin', ''); // Fix the js error (use .setAttribute('crossOrigin', '') and had to append a timestamp to the URL's query string to avoid a 304 response lacking the Access-Control-Allow-Origin header.)
         image.onload = function(){
             let hRatio = canvas.width / image.width,
             vRatio = canvas.height / image.height,
